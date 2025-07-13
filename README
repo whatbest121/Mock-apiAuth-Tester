@@ -12,3 +12,7 @@ node index.js
 
 ```pip install robotframework```
 ```robot robot/tests/test_case.robot```
+
+## LOG Screenshot 
+```log_Login.png```
+```log_Register.png```
