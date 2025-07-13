@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.11.13 on darwin)" generated="2025-07-13T16:49:16.145873" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Case" source="/Users/macbook/test/Mock-apiAuth-Tester/results/../robot/tests/test_case.robot">
+<test id="s1-t1" name="Check URL Server" line="9">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.203119" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.203052" elapsed="0.000143"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.202821" elapsed="0.000415"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.219321" level="INFO">GET Request : url=http://localhost:3000/api/health 
+ path_url=/api/health 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-07-13T16:49:16.219403" level="INFO">GET Response : url=http://localhost:3000/api/health 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-CSKUAQdzihFnZ31rHxumRTopemg"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"status":"OK","message":"Mock server is running"} 
+ </msg>
+<msg time="2025-07-13T16:49:16.219511" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/health</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.203301" elapsed="0.016227"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.219955" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.219693" elapsed="0.000290"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.202560" elapsed="0.017490"/>
+</test>
+<test id="s1-t2" name="E2E Register" line="15">
+<kw name="TC_001_Register_With_Correct_Credentials" owner="keywords_Register">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.220558" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.220502" elapsed="0.000758"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.220413" elapsed="0.000878"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.221486" level="INFO">${payload} = {'phone_number': '0970177078'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${PHONE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.221349" elapsed="0.000147"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.231124" level="INFO">POST Request : url=http://localhost:3000/api/auth/register 
+ path_url=/api/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "0970177078"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.231176" level="INFO">POST Response : url=http://localhost:3000/api/auth/register 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '49', 'ETag': 'W/"31-rUaDYxVeNUAqnxKYzPkFi2VquA4"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"user_id":2,"message":"Registration successful"} 
+ </msg>
+<msg time="2025-07-13T16:49:16.231255" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/register</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.221536" elapsed="0.009733"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.231351" elapsed="0.000128"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>Registration successful</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.231535" elapsed="0.000279"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.232065" level="INFO">${id} = 2</msg>
+<var>${id}</var>
+<arg>${response.json()}[user_id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.231872" elapsed="0.000203"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.233521" level="INFO">GET Request : url=http://localhost:3000/api/auth/2 
+ path_url=/api/auth/2 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-07-13T16:49:16.233561" level="INFO">GET Response : url=http://localhost:3000/api/auth/2 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '54', 'ETag': 'W/"36-KQgsZrSyXraIwm9ypFlCkMNuwKk"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"id":2,"phone_number":"0970177078","status":"active"} 
+ </msg>
+<msg time="2025-07-13T16:49:16.233617" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/${id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.232117" elapsed="0.001512"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.233691" elapsed="0.000085"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[phone_number]</arg>
+<arg>${PHONE}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.233818" elapsed="0.000228"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<arg>active</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.234088" elapsed="0.000176"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.220309" elapsed="0.013983"/>
+</kw>
+<kw name="TC_002_Register_with_phone_without_entering_number_phone" owner="keywords_Register">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.234648" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.234601" elapsed="0.000113"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.234518" elapsed="0.000268"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.234894" level="INFO">${payload} = {}</msg>
+<var>${payload}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.234828" elapsed="0.000076"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.236781" level="INFO">POST Request : url=http://localhost:3000/api/auth/register 
+ path_url=/api/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '2', 'Content-Type': 'application/json'} 
+ body=b'{}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.236806" level="INFO">POST Response : url=http://localhost:3000/api/auth/register 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '47', 'ETag': 'W/"2f-jdJN7pLM74SXtvRrg6rn2E6Pz+Q"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Phone number is required","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.236845" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/register</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.234940" elapsed="0.001916"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.236900" elapsed="0.000063"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Phone number is required</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.237004" elapsed="0.000178"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.234404" elapsed="0.002800"/>
+</kw>
+<kw name="TC_003_Register_with_duplicate_phone_number" owner="keywords_Register">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.237715" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.237629" elapsed="0.000155"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.237414" elapsed="0.000400"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.237952" level="INFO">${payload} = {'phone_number': '0970177078'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${PHONE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.237856" elapsed="0.000105"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.239402" level="INFO">POST Request : url=http://localhost:3000/api/auth/register 
+ path_url=/api/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "0970177078"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.239432" level="INFO">POST Response : url=http://localhost:3000/api/auth/register 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-Xm743Qi+QK8ETnl+EeMKVOHP9Mg"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Phone number already exists","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.239489" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/register</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.237998" elapsed="0.001502"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.239558" elapsed="0.000075"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Phone number already exists</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.239670" elapsed="0.000200"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.237291" elapsed="0.002735"/>
+</kw>
+<kw name="TC_004_Register_With_Invalid_Format" owner="keywords_Register">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.240405" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.240352" elapsed="0.000108"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.240279" elapsed="0.000202"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.240691" level="INFO">${payload} = {'phone_number': '097017707a'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${Invalid}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.240611" elapsed="0.000089"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.242304" level="INFO">POST Request : url=http://localhost:3000/api/auth/register 
+ path_url=/api/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "097017707a"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.242333" level="INFO">POST Response : url=http://localhost:3000/api/auth/register 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-OhWJIPmxJw8cJwEyFwIB+7UoW2Y"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Invalid phone number format","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.242376" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/register</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.240735" elapsed="0.001650"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.242437" elapsed="0.000075"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Invalid phone number format</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.242551" elapsed="0.000208"/>
+</kw>
+<var name="${Invalid}">097017707a</var>
+<status status="PASS" start="2025-07-13T16:49:16.240573" elapsed="0.002200"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.242971" level="INFO">${payload} = {'phone_number': 'aaaaaaaaaa'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${Invalid}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.242895" elapsed="0.000085"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.244137" level="INFO">POST Request : url=http://localhost:3000/api/auth/register 
+ path_url=/api/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "aaaaaaaaaa"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.244162" level="INFO">POST Response : url=http://localhost:3000/api/auth/register 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-OhWJIPmxJw8cJwEyFwIB+7UoW2Y"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Invalid phone number format","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.244204" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/register</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.243015" elapsed="0.001198"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.244260" elapsed="0.000064"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Invalid phone number format</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.244361" elapsed="0.000187"/>
+</kw>
+<var name="${Invalid}">aaaaaaaaaa</var>
+<status status="PASS" start="2025-07-13T16:49:16.242861" elapsed="0.001701"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.244705" level="INFO">${payload} = {'phone_number': '097017707'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${Invalid}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.244633" elapsed="0.000081"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.246524" level="INFO">POST Request : url=http://localhost:3000/api/auth/register 
+ path_url=/api/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '29', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "097017707"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.246552" level="INFO">POST Response : url=http://localhost:3000/api/auth/register 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-OhWJIPmxJw8cJwEyFwIB+7UoW2Y"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Invalid phone number format","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.246596" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/register</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.244749" elapsed="0.001857"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.246657" elapsed="0.000068"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Invalid phone number format</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.246764" elapsed="0.000186"/>
+</kw>
+<var name="${Invalid}">097017707</var>
+<status status="PASS" start="2025-07-13T16:49:16.244600" elapsed="0.002364"/>
+</iter>
+<var>${Invalid}</var>
+<value>@{Invalid_Format}</value>
+<status status="PASS" start="2025-07-13T16:49:16.240506" elapsed="0.006471"/>
+</for>
+<status status="PASS" start="2025-07-13T16:49:16.240165" elapsed="0.006839"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.220138" elapsed="0.026927"/>
+</test>
+<test id="s1-t3" name="E2E Login" line="21">
+<kw name="TC_005_Login_With_Correct_Credentials" owner="keywords_Login">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.247651" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.247603" elapsed="0.000100"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.247435" elapsed="0.000290"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.248034" level="INFO">${payload} = {'phone_number': '0970177078'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${PHONE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.247765" elapsed="0.000281"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.250878" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
+ path_url=/api/auth/login 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "0970177078"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.250903" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '107', 'ETag': 'W/"6b-rslwhGPoLsefzQHc+5tYETDFv9w"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mock.token","user_id":1,"message":"Login successful"} 
+ </msg>
+<msg time="2025-07-13T16:49:16.250950" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/login</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.248234" elapsed="0.002726"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.251016" elapsed="0.000082"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.251141" elapsed="0.000209"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.247345" elapsed="0.004033"/>
+</kw>
+<kw name="TC_006_Log in with phone_without_entering_number_phone" owner="keywords_Login">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.252336" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.252245" elapsed="0.000152"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.252124" elapsed="0.000295"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.252524" level="INFO">${payload} = {}</msg>
+<var>${payload}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.252461" elapsed="0.000073"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.254488" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
+ path_url=/api/auth/login 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '2', 'Content-Type': 'application/json'} 
+ body=b'{}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.254526" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '47', 'ETag': 'W/"2f-jdJN7pLM74SXtvRrg6rn2E6Pz+Q"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Phone number is required","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.254606" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.252568" elapsed="0.002057"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.254689" elapsed="0.000078"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Phone number is required</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.254807" elapsed="0.000191"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.251782" elapsed="0.003240"/>
+</kw>
+<kw name="TC_007_Login_With_Unregistered_Phone" owner="keywords_Login">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.255313" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.255266" elapsed="0.000106"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.255191" elapsed="0.000202"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.255491" level="INFO">${payload} = {'phone_number': '0970177070'}</msg>
+<var>${payload}</var>
+<arg>phone_number=0970177070</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.255430" elapsed="0.000070"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.256759" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
+ path_url=/api/auth/login 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "0970177070"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.256782" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-fKTAuD3OmKqKvU3GJeoLYlOTi08"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Phone number not registered","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.256817" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.255537" elapsed="0.001289"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.256868" elapsed="0.000058"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Phone number not registered</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.256963" elapsed="0.000178"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.255101" elapsed="0.002061"/>
+</kw>
+<kw name="TC_008_Login_With_Invalid_Format" owner="keywords_Login">
+<kw name="Myapi" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.257883" level="INFO">Creating Session using : alias=myapi, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>myapi</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-07-13T16:49:16.257763" elapsed="0.000173"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.257329" elapsed="0.000630"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.258171" level="INFO">${payload} = {'phone_number': '097017707a'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${Invalid}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.258089" elapsed="0.000094"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.259568" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
+ path_url=/api/auth/login 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "097017707a"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.259593" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-OhWJIPmxJw8cJwEyFwIB+7UoW2Y"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Invalid phone number format","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.259635" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.258221" elapsed="0.001424"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.259690" elapsed="0.000060"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Invalid phone number format</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.259827" elapsed="0.000193"/>
+</kw>
+<var name="${Invalid}">097017707a</var>
+<status status="PASS" start="2025-07-13T16:49:16.258052" elapsed="0.001982"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.260186" level="INFO">${payload} = {'phone_number': 'aaaaaaaaaa'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${Invalid}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.260110" elapsed="0.000086"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.261483" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
+ path_url=/api/auth/login 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "aaaaaaaaaa"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.261509" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-OhWJIPmxJw8cJwEyFwIB+7UoW2Y"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Invalid phone number format","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.261554" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.260233" elapsed="0.001331"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.261614" elapsed="0.000070"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Invalid phone number format</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.261728" elapsed="0.000186"/>
+</kw>
+<var name="${Invalid}">aaaaaaaaaa</var>
+<status status="PASS" start="2025-07-13T16:49:16.260076" elapsed="0.001853"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-07-13T16:49:16.262082" level="INFO">${payload} = {'phone_number': '097017707'}</msg>
+<var>${payload}</var>
+<arg>phone_number=${Invalid}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.262002" elapsed="0.000089"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-07-13T16:49:16.263131" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
+ path_url=/api/auth/login 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '29', 'Content-Type': 'application/json'} 
+ body=b'{"phone_number": "097017707"}' 
+ </msg>
+<msg time="2025-07-13T16:49:16.263159" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
+ status=400, reason=Bad Request 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'ETag': 'W/"32-OhWJIPmxJw8cJwEyFwIB+7UoW2Y"', 'Date': 'Sun, 13 Jul 2025 09:49:16 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"error":"Invalid phone number format","code":400} 
+ </msg>
+<msg time="2025-07-13T16:49:16.263204" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>myapi</arg>
+<arg>/api/auth/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.262127" elapsed="0.001086"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.263263" elapsed="0.000073"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[error]</arg>
+<arg>Invalid phone number format</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-07-13T16:49:16.263400" elapsed="0.000194"/>
+</kw>
+<var name="${Invalid}">097017707</var>
+<status status="PASS" start="2025-07-13T16:49:16.261968" elapsed="0.001641"/>
+</iter>
+<var>${Invalid}</var>
+<value>@{Invalid_Format}</value>
+<status status="PASS" start="2025-07-13T16:49:16.257980" elapsed="0.005643"/>
+</for>
+<status status="PASS" start="2025-07-13T16:49:16.257238" elapsed="0.006410"/>
+</kw>
+<status status="PASS" start="2025-07-13T16:49:16.247175" elapsed="0.016537"/>
+</test>
+<status status="PASS" start="2025-07-13T16:49:16.146883" elapsed="0.117071"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Case" id="s1" pass="3" fail="0" skip="0">Test Case</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
