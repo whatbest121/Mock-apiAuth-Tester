@@ -1,0 +1,14 @@
+## 🚀 How to Run
+
+### 1️⃣ Start Backend Server
+
+```bash
+cd server
+npm install
+node index.js
+```
+
+### 2️⃣ Run Robot Framework Tests API 
+
+```pip install robotframework```
+```robot robot/tests/test_case.robot```
