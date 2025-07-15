@@ -14,5 +14,5 @@ node index.js
 ```robot robot/tests/test_case.robot```
 
 ## LOG Screenshot 
-```log_Login.png```
-```log_Register.png```
+![Login Log](robot/tests/images/log_Login.png)
+![Register Log](robot/tests/images/log_Register.png)
